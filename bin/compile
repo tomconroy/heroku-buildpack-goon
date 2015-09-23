@@ -9,19 +9,19 @@ mkdir -p $BIN_PATH $TMP_PATH
 GOON_URL="https://github.com/alco/goon/releases/download/v1.1.1/goon_linux_amd64.tar.gz"
 
 echo "-----> Downloading goon package"
-curl -L $GOON_URL -o /tmp/goon.tar.gz
+curl -L $GOON_URL -o $TMP_PATH/goon.tar.gz
 
 echo "-----> Unpacking goon package"
-tar -xzf goon.tar.gz -C /tmp
+tar -xzf $TMP_PATH/goon.tar.gz -C $TMP_PATH
 
 echo "-----> Setting permissions"
-chmod +x /tmp/goon
+chmod +x $TMP_PATH/goon
 
 echo "-----> Moving binaries to the right place"
-mv /tmp/goon $BIN_PATH/
+mv $TMP_PATH/goon $BIN_PATH/
 
 echo "-----> Cleaning up"
-rm -rf goon.tar.gz /tmp/goon /tmp/goon_linux_amd64_fixed.zip
+rm -rf $TMP_PATH/goon*
 
 echo "-----> Adjusting environment variables"
 mkdir $1/.profile.d
