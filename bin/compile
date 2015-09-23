@@ -2,7 +2,7 @@
 
 set -e
 
-BIN_PATH="$1/bin"
+BIN_PATH="$1/.wkhtmltopdf"
 TMP_PATH="$1/tmp"
 mkdir -p $BIN_PATH $TMP_PATH
 
@@ -25,5 +25,10 @@ mv $WKHTMLTOPDF_BINARIES/* $BIN_PATH/
 
 echo "-----> Cleaning up"
 rm -rf $WKHTMLTOPDF_PKG $WKHTMLTOPDF_PATH
+
+echo "-----> Adjusting environment variables"
+mkdir $1/.profile.d
+echo "export PATH=$PATH:$1/.wkhtmltopdf" > $1/.profile.d/wkhtmltopdf.sh
+chmod +x $1/.profile.d/wkhtmltopdf.sh
 
 exit 0
