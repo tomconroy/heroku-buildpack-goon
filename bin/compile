@@ -9,10 +9,9 @@ mkdir -p $BIN_PATH $TMP_PATH
 GOON_URL="https://github.com/alco/goon/releases/download/v1.1.1/goon_linux_amd64.tar.gz"
 
 echo "-----> Downloading goon package"
-curl -L $WKHTMLTOPDF_URL -o /tmp/goon.tar.gz
+curl -L $GOON_URL -o /tmp/goon.tar.gz
 
 echo "-----> Unpacking goon package"
-dpkg -x $WKHTMLTOPDF_PKG $WKHTMLTOPDF_PATH
 tar -xzf goon.tar.gz -C /tmp
 
 echo "-----> Setting permissions"
