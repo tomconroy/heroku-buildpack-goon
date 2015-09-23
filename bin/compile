@@ -2,33 +2,31 @@
 
 set -e
 
-BIN_PATH="$1/.wkhtmltopdf"
+BIN_PATH="$1/.goon"
 TMP_PATH="$1/tmp"
 mkdir -p $BIN_PATH $TMP_PATH
 
-WKHTMLTOPDF_URL="http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb"
-WKHTMLTOPDF_PKG="$TMP_PATH/wkhtmltopdf.deb"
-WKHTMLTOPDF_PATH="$TMP_PATH/wkhtmltopdf"
-WKHTMLTOPDF_BINARIES="$WKHTMLTOPDF_PATH/usr/local/bin"
+GOON_URL="https://github.com/alco/goon/releases/download/v1.1.1/goon_linux_amd64.tar.gz"
 
-echo "-----> Downloading wkhtmltopdf Debian package"
-curl -L $WKHTMLTOPDF_URL -o $WKHTMLTOPDF_PKG
+echo "-----> Downloading goon package"
+curl -L $WKHTMLTOPDF_URL -o /tmp/goon.tar.gz
 
-echo "-----> Unpacking Debian package"
+echo "-----> Unpacking goon package"
 dpkg -x $WKHTMLTOPDF_PKG $WKHTMLTOPDF_PATH
+tar -xzf goon.tar.gz -C /tmp
 
 echo "-----> Setting permissions"
-chmod +x $WKHTMLTOPDF_BINARIES/*
+chmod +x /tmp/goon
 
 echo "-----> Moving binaries to the right place"
-mv $WKHTMLTOPDF_BINARIES/* $BIN_PATH/
+mv /tmp/goon $BIN_PATH/
 
 echo "-----> Cleaning up"
-rm -rf $WKHTMLTOPDF_PKG $WKHTMLTOPDF_PATH
+rm -rf goon.tar.gz /tmp/goon /tmp/goon_linux_amd64_fixed.zip
 
 echo "-----> Adjusting environment variables"
 mkdir $1/.profile.d
-echo "export PATH=\$PATH:/app/.wkhtmltopdf" > $1/.profile.d/wkhtmltopdf.sh
-chmod +x $1/.profile.d/wkhtmltopdf.sh
+echo "export PATH=\$PATH:/app/.goon" > $1/.profile.d/goon.sh
+chmod +x $1/.profile.d/goon.sh
 
 exit 0
