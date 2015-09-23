@@ -24,7 +24,7 @@ echo "-----> Cleaning up"
 rm -rf $TMP_PATH/goon*
 
 echo "-----> Adjusting environment variables"
-mkdir $1/.profile.d
+mkdir -p $1/.profile.d
 echo "export PATH=\$PATH:/app/.goon" > $1/.profile.d/goon.sh
 chmod +x $1/.profile.d/goon.sh
 
